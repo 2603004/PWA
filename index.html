@@ -998,3 +998,49 @@
             <div class="stars">★★★★★</div>
             <p>
               "The Puran Poli tastes just like
+             <p>
+            "Chitale's Bhakarwadi from Swad Maharashtra Cha is always fresh and
+            perfect. I order monthly for my family in the US."
+          </p>
+          <div class="customer">- Rohan Kulkarni, New Jersey</div>
+        </div>
+      </div>
+    </section>
+      <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("serviceworker.js")
+            .then((registration) => {
+              console.log("✅ Service Worker registered! Scope:", registration.scope);
+   
+              // 🔔 Request Push Notification Permission
+              if ("PushManager" in window) {
+                Notification.requestPermission().then((permission) => {
+                  if (permission === "granted") {
+                    console.log("🔔 Push notifications granted.");
+                  } else {
+                    console.log("🔕 Push notifications denied.");
+                  }
+                });
+              }
+   
+              // 🔄 Register Background Sync
+              if ("SyncManager" in window) {
+                navigator.serviceWorker.ready.then((swReg) => {
+                  swReg.sync.register("sync-data").then(() => {
+                    console.log("🔄 Sync registered");
+                  }).catch((err) => {
+                    console.log("❌ Sync registration failed:", err);
+                  });
+                });
+              }
+            })
+            .catch((error) => {
+              console.log("❌ Service Worker registration failed:", error);
+            });
+        });
+      }
+    </script>
+</body>
+</html>
