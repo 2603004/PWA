@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- PWA Theme Color -->
-    <meta name="theme-color" content="#b22222" />
+    <meta name="theme-color" content="#14213d" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -23,301 +23,970 @@
     <!-- Manifest File for PWA -->
     <link rel="manifest" href="manifest.json" />
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
+    <style>
+      :root {
+        --primary: #14213d;       /* Deep blue */
+        --secondary: #2a6fdb;     /* Brighter blue */
+        --accent: #3e92cc;        /* Light blue */
+        --dark: #121212;          /* Nearly black */
+        --light: #f8f9fa;         /* Off-white */
+        --gray: #6c757d;          /* Medium gray */
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --radius: 8px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+        color: var(--dark);
+        background-color: var(--light);
+        line-height: 1.6;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: 'Merriweather', serif;
+        line-height: 1.3;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--primary);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        font-family: 'Merriweather', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .logo span {
+        color: var(--accent);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .cart-icon {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: var(--accent);
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      /* Mobile menu */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 80px 0;
+        background: linear-gradient(rgba(20, 33, 61, 0.8), rgba(20, 33, 61, 0.8)), url('images/maharashtra-pattern.png');
+        background-size: cover;
+        color: white;
+      }
+
+      .hero-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .hero-text {
+        flex: 1;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .hero-text p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .hero-img {
+        flex: 1;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--secondary);
+        color: white;
+        padding: 12px 24px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      .btn:hover {
+        background-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--accent);
+        color: white;
+      }
+
+      .btn-outline:hover {
+        background-color: var(--accent);
+        color: white;
+      }
+
+      /* Category Pills */
+      .category-pills {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 50px 0 30px;
+        flex-wrap: wrap;
+      }
+
+      .category-pill {
+        padding: 10px 20px;
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .category-pill.active, .category-pill:hover {
+        background-color: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      /* Sections */
+      .section {
+        padding: 80px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-header h2 {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--accent);
+      }
+
+      .section-header p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        color: var(--gray);
+      }
+
+      /* Product Grid */
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-img {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .card:hover .card-img img {
+        transform: scale(1.05);
+      }
+
+      .card-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--accent);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .card-content {
+        padding: 20px;
+      }
+
+      .card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: var(--primary);
+      }
+
+      .card p {
+        color: var(--gray);
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+      }
+
+      .card-price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--secondary);
+      }
+
+      .old-price {
+        text-decoration: line-through;
+        font-size: 0.9rem;
+        color: #999;
+        margin-left: 5px;
+      }
+
+      .add-to-cart {
+        width: 100%;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: var(--radius);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .add-to-cart:hover {
+        background-color: var(--secondary);
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background-color: var(--dark);
+        padding: 80px 0;
+        color: white;
+      }
+
+      .testimonials .section-header h2 {
+        color: white;
+      }
+
+      .testimonials .section-header p {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .testimonial-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .testimonial-card::before {
+        content: " ";
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-size: 5rem;
+        color: rgba(62, 146, 204, 0.2);
+        font-family: Georgia, serif;
+        line-height: 1;
+      }
+
+      .stars {
+        color: var(--accent);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+      }
+
+      .customer {
+        font-weight: 600;
+        margin-top: 15px;
+        color: var(--accent);
+      }
+
+      /* Contact Section */
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .contact-info {
+        background-color: var(--primary);
+        padding: 30px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        color: white;
+      }
+
+      .contact-info h3 {
+        margin-bottom: 20px;
+        color: var(--accent);
+      }
+
+      .contact-info p {
+        margin-bottom: 15px;
+      }
+
+      .contact-form {
+        background-color: white;
+        padding: 30px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid #e0e0e0;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--primary);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: var(--radius);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent);
+        outline: none;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark);
+        color: white;
+        padding-top: 60px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-logo .logo {
+        font-size: 1.5rem;
+      }
+
+      .footer-logo p {
+        margin-top: 15px;
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      .footer-links h4,
+      .footer-newsletter h4 {
+        color: white;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .footer-links h4::after,
+      .footer-newsletter h4::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: var(--accent);
+      }
+
+      .footer-links a {
+        display: block;
+        color: #ccc;
+        text-decoration: none;
+        margin-bottom: 10px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      .footer-newsletter p {
+        margin-bottom: 15px;
+        color: #ccc;
+      }
+
+      .newsletter-form {
+        display: flex;
+      }
+
+      .newsletter-form input {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        border-radius: var(--radius) 0 0 var(--radius);
+      }
+
+      .btn-small {
+        padding: 10px 15px;
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-bottom p {
+        font-size: 0.9rem;
+      }
+
+      .socials {
+        display: flex;
+        gap: 15px;
+      }
+
+      .socials a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .socials a:hover {
+        color: var(--accent);
+      }
+
+      /* Featured Badge */
+      .featured {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .featured::before {
+        content: 'Featured';
+        position: absolute;
+        top: 25px;
+        left: -30px;
+        background-color: var(--accent);
+        color: white;
+        padding: 5px 40px;
+        transform: rotate(-45deg);
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 1;
+      }
+
+      /* Call to Action */
+      .cta {
+        background-color: var(--primary);
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .cta h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .cta p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto 30px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .cta .btn {
+        background-color: var(--accent);
+        color: white;
+      }
+
+      .cta .btn:hover {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      /* Media Queries */
+      @media (max-width: 992px) {
+        .hero-container {
+          flex-direction: column;
+        }
+
+        .hero-text h1 {
+          font-size: 2.5rem;
+        }
+
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 80%;
+          height: 100%;
+          background-color: var(--primary);
+          z-index: 1000;
+          padding: 20px;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          color: white;
+        }
+
+        .mobile-menu.active {
+          transform: translateX(0);
+        }
+
+        .mobile-menu-close {
+          text-align: right;
+          margin-bottom: 20px;
+        }
+
+        .mobile-menu-close button {
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: white;
+        }
+
+        .mobile-menu a {
+          display: block;
+          padding: 10px 0;
+          font-size: 1.2rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          color: white;
+          text-decoration: none;
+        }
+
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+          display: none;
+        }
+
+        .overlay.active {
+          display: block;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
-      <div class="logo">Swad Maharashtra Cha</div>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#spices">Spices</a>
-        <a href="#sweets">Sweets</a>
-        <a href="#snacks">Snacks</a>
-        <a href="#contact">Contact</a>
-        <div class="cart-icon">
-          <img src="images/cart.svg" alt="Cart" />
-          <span class="cart-count">0</span>
-        </div>
-      </nav>
+      <div class="container header-container">
+        <div class="logo">Swad <span>Maharashtra</span></div>
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#spices">Spices</a>
+          <a href="#sweets">Sweets</a>
+          <a href="#snacks">Snacks</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="mobile-menu-btn">☰</button>
+      </div>
     </header>
 
+    <div class="mobile-menu">
+     
+    <div class="overlay"></div>
+
     <section class="hero" id="home">
-      <div class="hero-text">
-        <h1>Authentic Taste of Maharashtra</h1>
-        <p>
-          Explore our curated selection of traditional spices, sweets, and
-          snacks shipped straight from local Maharashtrian kitchens to your
-          doorstep.
-        </p>
-        <a href="#spices" class="btn">Start Tasting</a>
-      </div>
-      <div class="hero-img">
-        <img src="images/maharashtra-feast.webp" alt="Maharashtrian Feast" />
+      <div class="container hero-container">
+        <div class="hero-text">
+          <h1>Authentic Taste of Maharashtra</h1>
+          <p>
+            Explore our curated selection of traditional spices, sweets, and
+            snacks shipped straight from local Maharashtrian kitchens to your
+            doorstep.
+          </p>
+          <div class="hero-buttons">
+            <a href="#spices" class="btn">Explore Products</a>
+            <a href="#contact" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <img src="images/maharashtra-feast.webp" alt="Maharashtrian Feast" />
+        </div>
       </div>
     </section>
 
+    <div class="container">
+      <div class="category-pills">
+        <div class="category-pill active">All Products</div>
+        <div class="category-pill">Bestsellers</div>
+        <div class="category-pill">Festival Specials</div>
+        <div class="category-pill">New Arrivals</div>
+        <div class="category-pill">Gift Packs</div>
+      </div>
+    </div>
+
     <section class="section" id="spices">
-      <h2>🌶️ Signature Spices</h2>
-      <div class="product-grid">
-        <div class="card">
-          <div class="card-img">
-            <img src="images/goda-masala.webp" alt="Goda Masala" />
-            <div class="card-badge">Bestseller</div>
-          </div>
-          <h3>Goda Masala</h3>
-          <p>
-            Traditional blend for sabzis, dal, and bhaji prepared by skilled
-            local artisans.
-          </p>
-          <div class="card-price">₹299 <span class="old-price">₹349</span></div>
-          <button class="add-to-cart">Add to Cart</button>
+      <div class="container">
+        <div class="section-header">
+          <h2>Signature Spices</h2>
+          <p>Authentic masalas handcrafted with traditional recipes passed down through generations</p>
         </div>
+        <div class="product-grid">
+          <div class="card featured">
+            <div class="card-img">
+              <img src="images/goda-masala.webp" alt="Goda Masala" />
+              <div class="card-badge">Bestseller</div>
+            </div>
+            <div class="card-content">
+              <h3>Goda Masala</h3>
+              <p>
+          
+                Traditional blend for sabzis, dal, and bhaji prepared by skilled
+                local artisans.
+              </p>
+              <div class="card-price">₹299 <span class="old-price">₹349</span></div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
 
-        <div class="card">
-          <div class="card-img">
-            <img src="images/malvani-masala.webp" alt="Malvani Masala" />
+          <div class="card">
+            <div class="card-img">
+              <img src="images/malvani-masala.webp" alt="Malvani Masala" />
+            </div>
+            <div class="card-content">
+              <h3>Malvani Masala</h3>
+              <p>
+                Fiery and flavorful, perfect for coastal dishes with authentic
+                Konkan taste.
+              </p>
+              <div class="card-price">₹279</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
           </div>
-          <h3>Malvani Masala</h3>
-          <p>
-            Fiery and flavorful, perfect for coastal dishes with authentic
-            Konkan taste.
-          </p>
-          <div class="card-price">₹279</div>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
 
-        <div class="card">
-          <div class="card-img">
-            <img src="images/kanda-lasun.webp" alt="Kanda Lasun Masala" />
+          <div class="card">
+            <div class="card-img">
+              <img src="images/kanda-lasun.webp" alt="Kanda Lasun Masala" />
+            </div>
+            <div class="card-content">
+              <h3>Kanda Lasun Masala</h3>
+              <p>
+                Bold garlic-onion mix, essential in Maharashtrian kitchens for daily
+                cooking.
+              </p>
+              <div class="card-price">₹249</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
           </div>
-          <h3>Kanda Lasun Masala</h3>
-          <p>
-            Bold garlic-onion mix, essential in Maharashtrian kitchens for daily
-            cooking.
-          </p>
-          <div class="card-price">₹249</div>
-          <button class="add-to-cart">Add to Cart</button>
         </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <h2>Taste Authentic Maharashtra</h2>
+        <p>Sign up for our newsletter and get 10% off your first order!</p>
+        <a href="#" class="btn">Subscribe Now</a>
       </div>
     </section>
 
     <section class="section" id="sweets">
-      <h2>🍬 Sweet Traditions</h2>
-      <div class="product-grid">
-        <div class="card">
-          <div class="card-img">
-            <img src="images/puran-poli.webp" alt="Puran Poli" />
-            <div class="card-badge">Homemade</div>
-          </div>
-          <h3>Puran Poli</h3>
-          <p>
-            Soft wheat flatbreads stuffed with sweet chana filling. Pack of 5
-            pieces.
-          </p>
-          <div class="card-price">₹399</div>
-          <button class="add-to-cart">Add to Cart</button>
+      <div class="container">
+        <div class="section-header">
+          <h2>Sweet Traditions</h2>
+          <p>Handcrafted delicacies that bring the essence of Maharashtrian festivals to your home</p>
         </div>
-
-        <div class="card">
-          <div class="card-img">
-            <img src="images/modak.webp" alt="Ukadiche Modak" />
-            <div class="card-badge">Festival Special</div>
+        <div class="product-grid">
+          <div class="card">
+            <div class="card-img">
+              <img src="images/puran-poli.webp" alt="Puran Poli" />
+              <div class="card-badge">Homemade</div>
+            </div>
+            <div class="card-content">
+              <h3>Puran Poli</h3>
+              <p>
+                Soft wheat flatbreads stuffed with sweet chana filling. Pack of 5
+                pieces.
+              </p>
+              <div class="card-price">₹399</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
           </div>
-          <h3>Ukadiche Modak</h3>
-          <p>
-            Steamed sweet dumplings with coconut-jaggery goodness. Pack of 10
-            pieces.
-          </p>
-          <div class="card-price">₹349</div>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
 
-        <div class="card">
-          <div class="card-img">
-            <img src="images/shrikhand.webp" alt="Amrakhand" />
+          <div class="card featured">
+            <div class="card-img">
+              <img src="images/modak.webp" alt="Ukadiche Modak" />
+              <div class="card-badge">Festival Special</div>
+            </div>
+            <div class="card-content">
+              <h3>Ukadiche Modak</h3>
+              <p>
+                Steamed sweet dumplings with coconut-jaggery goodness. Pack of 10
+                pieces.
+              </p>
+              <div class="card-price">₹349</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
           </div>
-          <h3>Amrakhand</h3>
-          <p>
-            Creamy strained yogurt dessert flavored with fresh Alphonso mangoes.
-          </p>
-          <div class="card-price">₹199</div>
-          <button class="add-to-cart">Add to Cart</button>
+
+          <div class="card">
+            <div class="card-img">
+              <img src="images/shrikhand.webp" alt="Amrakhand" />
+            </div>
+            <div class="card-content">
+              <h3>Amrakhand</h3>
+              <p>
+                Creamy strained yogurt dessert flavored with fresh Alphonso mangoes.
+              </p>
+              <div class="card-price">₹199</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="snacks">
-      <h2>🥟 Snacks by Chitale Bandhu</h2>
-      <div class="product-grid">
-        <div class="card">
-          <div class="card-img">
-            <img src="images/bhakarwadi.webp" alt="Bhakarwadi" />
-            <div class="card-badge">Popular</div>
-          </div>
-          <h3>Bhakarwadi</h3>
-          <p>
-            Spicy, sweet, and crunchy spirals from Chitale. 250g premium pack.
-          </p>
-          <div class="card-price">₹180</div>
-          <button class="add-to-cart">Add to Cart</button>
+      <div class="container">
+        <div class="section-header">
+          <h2>Chitale Bandhu Snacks</h2>
+          <p>Famous Maharashtrian snacks from the renowned Chitale Bandhu brand</p>
         </div>
-
-        <div class="card">
-          <div class="card-img">
-            <img src="images/chivda.webp" alt="Poha Chivda" />
+        <div class="product-grid">
+          <div class="card featured">
+            <div class="card-img">
+              <img src="images/bhakarwadi.webp" alt="Bhakarwadi" />
+              <div class="card-badge">Popular</div>
+            </div>
+            <div class="card-content">
+              <h3>Bhakarwadi</h3>
+              <p>
+                Spicy, sweet, and crunchy spirals from Chitale. 250g premium pack.
+              </p>
+              <div class="card-price">₹180</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
           </div>
-          <h3>Poha Chivda</h3>
-          <p>Crispy flattened rice snack with peanuts and spices. 200g pack.</p>
-          <div class="card-price">₹150</div>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
 
-        <div class="card">
-          <div class="card-img">
-            <img src="images/chakli.webp" alt="Chakli" />
+          <div class="card">
+            <div class="card-img">
+              <img src="images/chivda.webp" alt="Poha Chivda" />
+            </div>
+            <div class="card-content">
+              <h3>Poha Chivda</h3>
+              <p>Crispy flattened rice snack with peanuts and spices. 200g pack.</p>
+              <div class="card-price">₹150</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
           </div>
-          <h3>Chakli</h3>
-          <p>
-            Spiral-shaped crispy snack made from rice flour and spices. 200g
-            pack.
-          </p>
-          <div class="card-price">₹160</div>
-          <button class="add-to-cart">Add to Cart</button>
+
+          <div class="card">
+            <div class="card-img">
+              <img src="images/chakli.webp" alt="Chakli" />
+            </div>
+            <div class="card-content">
+              <h3>Chakli</h3>
+              <p>
+                Spiral-shaped crispy snack made from rice flour and spices. 200g
+                pack.
+              </p>
+              <div class="card-price">₹160</div>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="testimonials">
-      <h2>What Our Customers Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>
-            "The Goda Masala is exactly like what my aaji (grandmother) used to
-            make. It brings back so many memories of Maharashtra!"
-          </p>
-          <div class="customer">- Priya Joshi, Mumbai</div>
+      <div class="container">
+        <div class="section-header">
+          <h2>Customer Reviews</h2>
+          <p>See what our customers say about our authentic Maharashtrian products</p>
         </div>
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>
-            "Chitale's Bhakarwadi from Swad Maharashtra Cha is always fresh and
-            perfect. I order monthly for my family in the US."
-          </p>
-          <div class="customer">- Rohan Kulkarni, New Jersey</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <h2>Connect With Us</h2>
-      <div class="contact-container">
-        <div class="contact-info">
-          <h3>Our Shop</h3>
-          <p>
-            <strong>Address:</strong> 123 Laxmi Road, Pune 411030, Maharashtra
-          </p>
-          <p><strong>Phone:</strong> +91 98765 43210</p>
-          <p><strong>Email:</strong> info@swadmaharashtra.com</p>
-          <p><strong>Hours:</strong> Monday - Saturday, 10 AM - 8 PM</p>
-        </div>
-        <div class="contact-form">
-          <form>
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Your Message</label>
-              <textarea id="message" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-content">
-        <div class="footer-logo">
-          <div class="logo">Swad Maharashtra Cha</div>
-          <p>
-            Bringing authentic Maharashtrian flavors to your doorstep since
-            2022.
-          </p>
-        </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <a href="#home">Home</a>
-          <a href="#spices">Spices</a>
-          <a href="#sweets">Sweets</a>
-          <a href="#snacks">Snacks</a>
-        </div>
-        <div class="footer-newsletter">
-          <h4>Subscribe for Updates</h4>
-          <p>Get special offers and seasonal product alerts.</p>
-          <div class="newsletter-form">
-            <input type="email" placeholder="Your email address" />
-            <button class="btn-small">Subscribe</button>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "The Goda Masala is exactly like what my aaji (grandmother) used to
+              make. It brings back so many memories of Maharashtra!"
+            </p>
+            <div class="customer">- Priya Joshi, Mumbai</div>
           </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Swad Maharashtra Cha. Crafted with ❤️ in Pune.</p>
-        <div class="socials">
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
-          <a href="#">WhatsApp</a>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("serviceworker.js")
-            .then((registration) => {
-              console.log("✅ Service Worker registered! Scope:", registration.scope);
-   
-              // 🔔 Request Push Notification Permission
-              if ("PushManager" in window) {
-                Notification.requestPermission().then((permission) => {
-                  if (permission === "granted") {
-                    console.log("🔔 Push notifications granted.");
-                  } else {
-                    console.log("🔕 Push notifications denied.");
-                  }
-                });
-              }
-   
-              // 🔄 Register Background Sync
-              if ("SyncManager" in window) {
-                navigator.serviceWorker.ready.then((swReg) => {
-                  swReg.sync.register("sync-data").then(() => {
-                    console.log("🔄 Sync registered");
-                  }).catch((err) => {
-                    console.log("❌ Sync registration failed:", err);
-                  });
-                });
-              }
-            })
-            .catch((error) => {
-              console.log("❌ Service Worker registration failed:", error);
-            });
-        });
-      }
-    </script>
-</body>
-</html>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "Chitale's Bhakarwadi from Swad Maharashtra Cha is always fresh and
+              perfect. I order monthly for my family in the US."
+            </p>
+            <div class="customer">- Rohan Kulkarni, New Jersey</div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              "The Puran Poli tastes just like
